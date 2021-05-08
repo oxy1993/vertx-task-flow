@@ -21,7 +21,7 @@ public class HelloWorldHandler extends AbstractHandler {
         }
         helloWorldFlow.run(execHelloWorldMsg, done -> {
             String response = JsonUtils.objToString(done.getResponse());
-            log.info("Calculate promotion done with response: {}", response);
+            log.info("Hello world done with response: {}", response);
             log.info("======================================================");
             sendResponse(routingContext.response(), response, 200);
         });
