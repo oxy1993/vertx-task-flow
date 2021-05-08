@@ -1,9 +1,8 @@
-package com.oxy.vertx.demo.task.statrt_up;
+package com.oxy.vertx.demo.task.start_up;
 
-import com.oxy.vertx.demo.handler.CalculatePromotionHandler;
+import com.oxy.vertx.demo.handler.HelloWorldHandler;
 import com.oxy.vertx.base.OxyTask;
 import com.oxy.vertx.base.entities.StartUpMsg;
-import com.oxy.vertx.demo.handler.RollbackPromoCounterHandler;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
@@ -31,8 +30,7 @@ public class StartHttpServerTask extends OxyTask<StartUpMsg> {
     }
 
     private void routing(Router router) {
-        router.route(HttpMethod.POST, "/promotion").handler(new CalculatePromotionHandler());
-        router.route(HttpMethod.POST, "/rollback").handler(new RollbackPromoCounterHandler());
+        router.route(HttpMethod.POST, "/hello").handler(new HelloWorldHandler());
         /**
          * TODO Add another api here by create a handler like CalculatePromotionHandler implements Handler<RoutingContext>
          * router.route(HttpMethod.POST, "/some_api").handler(new SomeHandler());
