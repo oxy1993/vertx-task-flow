@@ -1,6 +1,7 @@
 package com.oxy.vertx.demo.task.start_up;
 
-import com.oxy.vertx.demo.handler.HelloWorldHandler;
+import com.oxy.vertx.demo.handler.HiHandler;
+import com.oxy.vertx.demo.handler.HelloHandler;
 import com.oxy.vertx.base.OxyTask;
 import com.oxy.vertx.base.entities.StartUpMsg;
 import io.vertx.core.Handler;
@@ -30,9 +31,10 @@ public class StartHttpServerTask extends OxyTask<StartUpMsg> {
     }
 
     private void routing(Router router) {
-        router.route(HttpMethod.POST, "/hello").handler(new HelloWorldHandler());
+        router.route(HttpMethod.POST, "/hello").handler(new HelloHandler());
+        router.route(HttpMethod.GET, "/hi").handler(new HiHandler());
         /**
-         * TODO Add another api here by create a handler like CalculatePromotionHandler implements Handler<RoutingContext>
+         * TODO Add another api here by create a handler like HelloWorldHandler implements Handler<RoutingContext>
          * router.route(HttpMethod.POST, "/some_api").handler(new SomeHandler());
          */
     }

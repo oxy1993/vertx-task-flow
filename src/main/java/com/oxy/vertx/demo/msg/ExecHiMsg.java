@@ -2,7 +2,7 @@ package com.oxy.vertx.demo.msg;
 
 import com.oxy.vertx.base.entities.BaseRequest;
 
-public class ExecHelloWorldMsg extends BaseRequest {
+public class ExecHiMsg extends BaseRequest {
     private String name;
 
     public String getName() {

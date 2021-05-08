@@ -2,12 +2,12 @@ package com.oxy.vertx.demo.task.helloworld;
 
 import com.oxy.vertx.base.OxyTask;
 import com.oxy.vertx.base.utils.StringUtils;
-import com.oxy.vertx.demo.msg.ExecHelloWorldMsg;
+import com.oxy.vertx.demo.msg.ExecHelloMsg;
 import io.vertx.core.Handler;
 
-public class ValidateHelloWorldReqTask extends OxyTask<ExecHelloWorldMsg> {
+public class ValidateHelloReqTask extends OxyTask<ExecHelloMsg> {
     @Override
-    protected void exec(ExecHelloWorldMsg input, Handler<ExecHelloWorldMsg> nextTask) {
+    protected void exec(ExecHelloMsg input, Handler<ExecHelloMsg> nextTask) {
         if (StringUtils.isNullOrEmpty(input.getName())) {
             log.error("Name is null");
             input.fail(1);

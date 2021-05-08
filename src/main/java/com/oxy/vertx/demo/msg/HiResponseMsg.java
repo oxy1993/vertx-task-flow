@@ -2,7 +2,7 @@ package com.oxy.vertx.demo.msg;
 
 import com.oxy.vertx.base.entities.BaseResponse;
 
-public class HelloWorldResponseMsg extends BaseResponse {
+public class HiResponseMsg extends BaseResponse {
     private String greeting;
 
     public String getGreeting() {

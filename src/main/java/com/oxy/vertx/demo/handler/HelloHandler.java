@@ -1,25 +1,26 @@
 package com.oxy.vertx.demo.handler;
 
 import com.oxy.vertx.base.utils.JsonUtils;
-import com.oxy.vertx.demo.flow.HelloWorldFlow;
-import com.oxy.vertx.demo.msg.ExecHelloWorldMsg;
+import com.oxy.vertx.demo.flow.HelloFlow;
+import com.oxy.vertx.demo.msg.ExecHelloMsg;
 import io.vertx.ext.web.RoutingContext;
 
-public class HelloWorldHandler extends AbstractHandler {
-    private final HelloWorldFlow helloWorldFlow;
+public class HelloHandler extends AbstractHandler {
+    private final HelloFlow helloFlow;
 
-    public HelloWorldHandler() {
-        this.helloWorldFlow = new HelloWorldFlow();
+    public HelloHandler() {
+        this.helloFlow = new HelloFlow();
     }
-
 
     @Override
     public void handle(RoutingContext routingContext) {
-        ExecHelloWorldMsg execHelloWorldMsg = validateHttpRequest(routingContext, ExecHelloWorldMsg.class);
-        if (execHelloWorldMsg == null) {
+        ExecHelloMsg execHelloMsg;
+        execHelloMsg = validateHttpRequest(routingContext, ExecHelloMsg.class);
+        if (execHelloMsg == null) {
             return;
         }
-        helloWorldFlow.run(execHelloWorldMsg, done -> {
+
+        helloFlow.run(execHelloMsg, done -> {
             String response = JsonUtils.objToString(done.getResponse());
             log.info("Hello world done with response: {}", response);
             log.info("======================================================");
