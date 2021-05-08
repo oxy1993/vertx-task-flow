@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30">
+    <Properties>
+        <Property name="basePath">../logs</Property>
+    </Properties>
+    <CustomLevels>
+        <CustomLevel name="EVENT" intLevel="350"/>
+    </CustomLevels>
+    <Appenders>
+        <RollingFile name="File" fileName="logs/service-promotion.log" filePattern="logs/service-promotion-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>|%highlight{%level}|%cyan{%d{yyyy-MM-dd HH:mm:ss,SSS}}|%blue{%t}|%magenta{%c{1}}|%notEmpty{%markerSimpleName|}%highlight{%m%ex{separator(\n)}}{INFO=normal, DEBUG=normal, TRACE=normal}|%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="|%highlight{%level}|%cyan{%d{yyyy-MM-dd HH:mm:ss,SSS}}|%blue{%t}|%magenta{%c{1}}|%notEmpty{%markerSimpleName|}%highlight{%m%ex{separator(\n)}}{INFO=normal, DEBUG=normal, TRACE=normal}|%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" level="INFO"/>
+            <AppenderRef ref="File" level="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>
