@@ -1,4 +1,4 @@
-package com.oxy.vertx.demo.task.helloworld;
+package com.oxy.vertx.demo.task.author;
 
 import com.oxy.vertx.base.OxyTask;
 import com.oxy.vertx.demo.msg.ExecGetAllAuthorsMsg;

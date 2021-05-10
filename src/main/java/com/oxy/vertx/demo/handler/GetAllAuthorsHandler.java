@@ -1,5 +1,6 @@
 package com.oxy.vertx.demo.handler;
 
+import com.oxy.vertx.base.entities.BaseResponse;
 import com.oxy.vertx.base.utils.JsonUtils;
 import com.oxy.vertx.demo.flow.GetAllAuthorsFlow;
 import com.oxy.vertx.demo.msg.ExecGetAllAuthorsMsg;
