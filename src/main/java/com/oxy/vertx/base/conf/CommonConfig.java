@@ -103,10 +103,10 @@ public class CommonConfig extends OxyTask<BaseRequest> {
             String env = System.getenv("XPC_SERVICE_NAME");
             log.info(env);
             InputStream is;
-            if (env != null && !env.contains("intellij")) {
-                is = getFileFromResourceAsStream("conf/prod.conf");
-            } else {
+            if (env != null && env.contains("intellij")) {
                 is = getFileFromResourceAsStream("conf/dev.conf");
+            } else {
+                is = getFileFromResourceAsStream("conf/prod.conf");
             }
             config = new JsonObject(getStringFromFile(is));
             log.info("Load config success: {}", config);
