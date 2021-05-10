@@ -8,6 +8,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.jdbc.impl.JDBCClientImpl;
 import io.vertx.ext.sql.ResultSet;
 import io.vertx.ext.sql.SQLConnection;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class BaseJDBCClientImpl extends io.vertx.ext.jdbc.impl.JDBCClientImpl implements BaseJDBCClient {
+public class BaseJDBCClientImpl extends JDBCClientImpl implements BaseJDBCClient {
 
     private static BaseJDBCClientImpl jdbcClient;
     private final Logger log = Logger.getLogger(BaseJDBCClientImpl.class);
