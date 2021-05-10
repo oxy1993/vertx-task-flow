@@ -1,5 +1,6 @@
 package com.oxy.vertx.demo.task.start_up;
 
+import com.oxy.vertx.demo.handler.GetAllAuthorsHandler;
 import com.oxy.vertx.demo.handler.HiHandler;
 import com.oxy.vertx.demo.handler.HelloHandler;
 import com.oxy.vertx.base.OxyTask;
@@ -33,6 +34,7 @@ public class StartHttpServerTask extends OxyTask<StartUpMsg> {
     private void routing(Router router) {
         router.route(HttpMethod.POST, "/hello").handler(new HelloHandler());
         router.route(HttpMethod.GET, "/hi").handler(new HiHandler());
+        router.route(HttpMethod.GET, "/authors").handler(new GetAllAuthorsHandler());
         /**
          * TODO Add another api here by create a handler like HelloWorldHandler implements Handler<RoutingContext>
          * router.route(HttpMethod.POST, "/some_api").handler(new SomeHandler());
