@@ -2,6 +2,8 @@ package com.oxy.vertx.demo.task.author;
 
 import com.oxy.vertx.base.OxyTask;
 import com.oxy.vertx.base.jdbc.BaseJDBCClientImpl;
+import com.oxy.vertx.base.msg.GetSetRedisValueMsg;
+import com.oxy.vertx.base.redis.GetRedisHelperTask;
 import com.oxy.vertx.demo.domain.Author;
 import com.oxy.vertx.demo.dto.AuthorDTO;
 import com.oxy.vertx.demo.msg.ExecGetAllAuthorsMsg;
@@ -14,17 +16,27 @@ public class ExecGetAllAuthorsTask extends OxyTask<ExecGetAllAuthorsMsg> {
     @Override
     protected void exec(ExecGetAllAuthorsMsg input, Handler<ExecGetAllAuthorsMsg> nextTask) {
         GetAllAuthorsResponseMsg responseMsg = input.createResponse(GetAllAuthorsResponseMsg.class);
-        BaseJDBCClientImpl.getClient().doQuery("select * from authors limit 10", Author.class, done -> {
-            responseMsg.setListAuthors(done.stream()
-                    .map(author -> AuthorDTO.AuthorFluentBuilder()
-                            .setId(author.getId())
-                            .setFirstName(author.getFirst_name())
-                            .setLastName(author.getLast_name())
-                            .setEmail(author.getEmail())
-                            .setBirthdate(author.getBirthdate())
-                            .setAdded(author.getAdded())
-                            .build()).collect(Collectors.toList()));
-            nextTask.handle(input);
+        GetSetRedisValueMsg getSetRedisValueMsg = new GetSetRedisValueMsg();
+        getSetRedisValueMsg.setKey("limit");
+        new GetRedisHelperTask().run(getSetRedisValueMsg, done -> {
+            if (done.getResponse().getResult() != 0) {
+                input.fail(done.getResponse().getResult());
+                nextTask.handle(input);
+            }
+
+            String limit = done.getValue();
+            BaseJDBCClientImpl.getClient().doQuery("select * from authors limit " + limit, Author.class, doneQuery -> {
+                responseMsg.setListAuthors(doneQuery.stream()
+                        .map(author -> AuthorDTO.AuthorFluentBuilder()
+                                .setId(author.getId())
+                                .setFirstName(author.getFirst_name())
+                                .setLastName(author.getLast_name())
+                                .setEmail(author.getEmail())
+                                .setBirthdate(author.getBirthdate())
+                                .setAdded(author.getAdded())
+                                .build()).collect(Collectors.toList()));
+                nextTask.handle(input);
+            });
         });
     }
 }
