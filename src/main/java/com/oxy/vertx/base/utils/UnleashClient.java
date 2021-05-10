@@ -27,8 +27,8 @@ public class UnleashClient {
 
     private static UnleashConfig defaultConfig() {
         return UnleashConfig.builder()
-                .appName("unipass")
-                .instanceId("unipass")
+                .appName("oxy")
+                .instanceId("oxy")
                 .unleashAPI("http://localhost:4242/api")
                 .build();
     }

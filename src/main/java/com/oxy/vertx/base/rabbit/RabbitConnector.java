@@ -1,5 +1,4 @@
-/*
-package com.unipass.base.rabbit;
+package com.oxy.vertx.base.rabbit;
 
 import io.vertx.core.Vertx;
 import io.vertx.rabbitmq.RabbitMQClient;
@@ -42,4 +41,3 @@ public class RabbitConnector {
         });
     }
 }
-*/
