@@ -8,15 +8,14 @@ import com.oxy.vertx.demo.msg.ExecGetAllAuthorsMsg;
 import com.oxy.vertx.demo.msg.GetAllAuthorsResponseMsg;
 import io.vertx.core.Handler;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ExecGetAllAuthorsTask extends OxyTask<ExecGetAllAuthorsMsg> {
     @Override
     protected void exec(ExecGetAllAuthorsMsg input, Handler<ExecGetAllAuthorsMsg> nextTask) {
         GetAllAuthorsResponseMsg responseMsg = input.createResponse(GetAllAuthorsResponseMsg.class);
-        BaseJDBCClientImpl.getClient().doQuery("select * from authors", Author.class, done -> {
-            List<AuthorDTO> collect = done.stream()
+        BaseJDBCClientImpl.getClient().doQuery("select * from authors limit 10", Author.class, done -> {
+            responseMsg.setListAuthors(done.stream()
                     .map(author -> AuthorDTO.AuthorFluentBuilder()
                             .setId(author.getId())
                             .setFirstName(author.getFirst_name())
@@ -24,8 +23,7 @@ public class ExecGetAllAuthorsTask extends OxyTask<ExecGetAllAuthorsMsg> {
                             .setEmail(author.getEmail())
                             .setBirthdate(author.getBirthdate())
                             .setAdded(author.getAdded())
-                            .build()).collect(Collectors.toList());
-            responseMsg.setListAuthors(collect);
+                            .build()).collect(Collectors.toList()));
             nextTask.handle(input);
         });
     }

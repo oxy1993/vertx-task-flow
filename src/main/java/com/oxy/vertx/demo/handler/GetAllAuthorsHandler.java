@@ -1,6 +1,5 @@
 package com.oxy.vertx.demo.handler;
 
-import com.oxy.vertx.base.entities.BaseResponse;
 import com.oxy.vertx.base.utils.JsonUtils;
 import com.oxy.vertx.demo.flow.GetAllAuthorsFlow;
 import com.oxy.vertx.demo.msg.ExecGetAllAuthorsMsg;
@@ -15,10 +14,7 @@ public class GetAllAuthorsHandler extends AbstractHandler{
 
     @Override
     public void handle(RoutingContext routingContext) {
-        getAllAuthorsFlow.run(new ExecGetAllAuthorsMsg(), done -> {
-            String response = JsonUtils.objToString(done.getResponse());
-            log.info("Get all authors done with response: ok");
-            sendResponse(routingContext.response(), response, 200);
-        });
+        getAllAuthorsFlow.run(new ExecGetAllAuthorsMsg(),
+                done -> sendResponse(routingContext.response(), JsonUtils.objToString(done.getResponse()), 200));
     }
 }
