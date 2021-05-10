@@ -17,7 +17,6 @@ public class GetAllAuthorsHandler extends AbstractHandler{
         getAllAuthorsFlow.run(new ExecGetAllAuthorsMsg(), done -> {
             String response = JsonUtils.objToString(done.getResponse());
             log.info("Get all authors done with response: ok");
-            log.info("======================================================");
             sendResponse(routingContext.response(), response, 200);
         });
     }
