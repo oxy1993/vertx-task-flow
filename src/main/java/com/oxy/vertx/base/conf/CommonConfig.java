@@ -101,6 +101,7 @@ public class CommonConfig extends OxyTask<BaseRequest> {
     protected void exec(BaseRequest input, Handler<BaseRequest> nextTask) {
         try {
             String env = System.getenv("XPC_SERVICE_NAME");
+            log.info(env);
             InputStream is;
             if (env != null && !env.contains("intellij")) {
                 is = getFileFromResourceAsStream("conf/prod.conf");
