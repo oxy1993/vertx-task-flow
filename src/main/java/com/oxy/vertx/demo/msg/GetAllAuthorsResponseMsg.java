@@ -11,4 +11,8 @@ public class GetAllAuthorsResponseMsg extends BaseResponse {
     public void setListAuthors(List<AuthorDTO> listAuthorDTOS) {
         this.listAuthorDTOS = listAuthorDTOS;
     }
+
+    public List<AuthorDTO> getListAuthorDTOS() {
+        return listAuthorDTOS;
+    }
 }
