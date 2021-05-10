@@ -8,26 +8,23 @@ import com.oxy.vertx.demo.msg.ExecGetAllAuthorsMsg;
 import com.oxy.vertx.demo.msg.GetAllAuthorsResponseMsg;
 import io.vertx.core.Handler;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExecGetAllAuthorsTask extends OxyTask<ExecGetAllAuthorsMsg> {
     @Override
     protected void exec(ExecGetAllAuthorsMsg input, Handler<ExecGetAllAuthorsMsg> nextTask) {
         GetAllAuthorsResponseMsg responseMsg = input.createResponse(GetAllAuthorsResponseMsg.class);
-        String sql = "select * from authors";
-        List<AuthorDTO> authorDTOList = new ArrayList<>();
-        BaseJDBCClientImpl.getClient().doQuery(sql, Author.class, done -> {
-            log.info("Get authors from authors success with size {}", done.size());
-            done.forEach(author -> authorDTOList.add(AuthorDTO.AuthorFluentBuilder()
+        BaseJDBCClientImpl.getClient().doQuery("select * from authors", Author.class, done -> {
+            responseMsg.setListAuthors(
+                    done.stream()
+                    .map(author -> AuthorDTO.AuthorFluentBuilder()
                     .setId(author.getId())
                     .setFirstName(author.getFirst_name())
                     .setLastName(author.getLast_name())
                     .setEmail(author.getEmail())
                     .setBirthdate(author.getBirthdate())
                     .setAdded(author.getAdded())
-                    .build()));
-            responseMsg.setListAuthors(authorDTOList);
+                    .build()).collect(Collectors.toList()));
             nextTask.handle(input);
         });
     }
