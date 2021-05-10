@@ -11,4 +11,5 @@ COPY $VERTICLE_JAR $VERTICLE_HOME/application.jar
 
 WORKDIR .
 
+#
 ENTRYPOINT ["sh", "-c","java -cp $VERTICLE_HOME/application.jar com.oxy.vertx.Main"]
