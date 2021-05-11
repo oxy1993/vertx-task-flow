@@ -34,7 +34,7 @@ public class Main {
         Vertx.clusteredVertx(options, res -> {
             if (res.succeeded()) {
                 Vertx vertx = res.result();
-                DeploymentOptions deploymentOptions = new DeploymentOptions().setInstances(3);
+                DeploymentOptions deploymentOptions = new DeploymentOptions().setInstances(5);
                 vertx.deployVerticle(HttpServerVerticle.class.getName(), deploymentOptions);
             }
         });
