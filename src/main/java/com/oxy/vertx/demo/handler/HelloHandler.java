@@ -20,6 +20,7 @@ public class HelloHandler extends AbstractHandler {
 //            return;
 //        }
 
+        log.info("hello world");
         sendResponse(routingContext.response(), "hello world", 200);
 
 //        helloFlow.run(execHelloMsg, done -> {
