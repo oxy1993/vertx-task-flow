@@ -14,7 +14,6 @@ public class GetAllAuthorsHandler extends AbstractHandler{
 
     @Override
     public void handle(RoutingContext routingContext) {
-        getAllAuthorsFlow.run(new ExecGetAllAuthorsMsg(),
-                done -> sendResponse(routingContext.response(), JsonUtils.objToString(done.getResponse()), 200));
+        getAllAuthorsFlow.run(new ExecGetAllAuthorsMsg(), done -> sendResponse(routingContext.response(), JsonUtils.objToString(done.getResponse()), 200));
     }
 }
