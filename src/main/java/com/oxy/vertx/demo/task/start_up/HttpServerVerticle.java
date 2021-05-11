@@ -39,7 +39,7 @@ public class HttpServerVerticle extends AbstractVerticle {
          * TODO Add another api here by create a handler like HelloWorldHandler implements Handler<RoutingContext>
          * router.route(HttpMethod.POST, "/some_api").handler(new SomeHandler());
          */
-        router.route(HttpMethod.POST, "/hello").handler(new HelloHandler());
+        router.route(HttpMethod.GET, "/hello").handler(new HelloHandler());
         router.route(HttpMethod.GET, "/hi").handler(new HiHandler());
         router.route(HttpMethod.GET, "/authors").handler(new GetAllAuthorsHandler());
     }
