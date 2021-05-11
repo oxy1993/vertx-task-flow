@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         JsonObject zkConfig = new JsonObject();
 //        zkConfig.put("zookeeperHosts", "localhost");
-        zkConfig.put("zookeeperHosts", "172.31.20.253");
+        zkConfig.put("zookeeperHosts", "172.31.46.15");
         zkConfig.put("rootPath", "io.vertx");
         zkConfig.put("retry", new JsonObject()
                 .put("initialSleepTime", 3000)
@@ -24,13 +24,6 @@ public class Main {
 
         ZookeeperClusterManager mgr = new ZookeeperClusterManager(zkConfig);
         VertxOptions options = new VertxOptions().setClusterManager(mgr);
-//        EventBusOptions eventBusOptions = new EventBusOptions();
-//        eventBusOptions.setClustered(true);
-//        eventBusOptions.setHost("localhost");
-//        eventBusOptions.setPort(8008);
-//        eventBusOptions.setClusterPublicHost("localhost");
-//        eventBusOptions.setClusterPublicPort(8008);
-//        options.setEventBusOptions(eventBusOptions);
 
         Vertx.clusteredVertx(options, res -> {
             if (res.succeeded()) {
