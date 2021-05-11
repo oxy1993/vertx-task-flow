@@ -15,8 +15,8 @@ public class Main {
 
     public static void main(String[] args) {
         JsonObject zkConfig = new JsonObject();
-        zkConfig.put("zookeeperHosts", "localhost");
-//        zkConfig.put("zookeeperHosts", "172.31.20.253");
+//        zkConfig.put("zookeeperHosts", "localhost");
+        zkConfig.put("zookeeperHosts", "172.31.20.253");
         zkConfig.put("rootPath", "io.vertx");
         zkConfig.put("retry", new JsonObject()
                 .put("initialSleepTime", 3000)
