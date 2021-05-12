@@ -1,4 +1,4 @@
-package com.oxy.vertx.demo.task.start_up;
+package com.oxy.vertx.demo.verticle;
 
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.utils.Logger;
