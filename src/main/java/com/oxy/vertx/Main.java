@@ -1,5 +1,6 @@
 package com.oxy.vertx;
 
+import com.oxy.vertx.base.utils.Logger;
 import com.oxy.vertx.demo.verticle.HttpServerVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
@@ -8,6 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
 
 public class Main {
+    private static final Logger log = Logger.getLogger(Main.class);
     public static void main(String[] args) {
         JsonObject zkConfig = new JsonObject();
 //        zkConfig.put("zookeeperHosts", "localhost");
