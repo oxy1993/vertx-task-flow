@@ -19,7 +19,7 @@ public class HttpServerVerticle extends AbstractVerticle {
         log.warn("Http server is starting...");
         HttpServer server = vertx.createHttpServer();
         Router router = Router.router(vertx);
-        server.requestHandler(router).listen(8008);
+        server.requestHandler(router).listen(8007);
         router.route().handler(BodyHandler.create());
         routing(router);
         log.info("Start http server success");
