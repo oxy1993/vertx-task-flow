@@ -35,6 +35,8 @@ public class ExecGetAllAuthorsTask extends OxyTask<ExecGetAllAuthorsMsg> {
                                 .setBirthdate(author.getBirthdate())
                                 .setAdded(author.getAdded())
                                 .build()).collect(Collectors.toList()));
+                responseMsg.setResult(doneQuery.size());
+                responseMsg.setDescription("Success");
                 nextTask.handle(input);
             });
         });

@@ -4,8 +4,6 @@ import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.utils.Logger;
 import com.oxy.vertx.demo.flow.DemoStartUpFlow;
 import com.oxy.vertx.demo.handler.GetAllAuthorsHandler;
-import com.oxy.vertx.demo.handler.HelloHandler;
-import com.oxy.vertx.demo.handler.HiHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
@@ -35,8 +33,6 @@ public class HttpServerVerticle extends AbstractVerticle {
     }
 
     private void routing(Router router) {
-        router.route(HttpMethod.GET, "/hello").handler(new HelloHandler());
-        router.route(HttpMethod.GET, "/hi").handler(new HiHandler());
         router.route(HttpMethod.GET, "/authors").handler(new GetAllAuthorsHandler());
     }
 }
