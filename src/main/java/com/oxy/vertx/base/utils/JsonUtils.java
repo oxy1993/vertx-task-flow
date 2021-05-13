@@ -2,13 +2,16 @@ package com.oxy.vertx.base.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.oxy.vertx.demo.dto.AuthorDTO;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JsonUtils {
@@ -65,6 +68,14 @@ public class JsonUtils {
     public static <T> T jsonToObj(JsonObject object, Class<T> type) {
         try {
             return mapper.readValue(object.encode(), type);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static <T> T jsonToObj(String object, TypeReference<T> typeReference) {
+        try {
+            return mapper.readValue(object, typeReference);
         } catch (Exception e) {
             return null;
         }
