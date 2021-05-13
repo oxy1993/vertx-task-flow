@@ -14,6 +14,12 @@ public class GetAllAuthorsHandler extends AbstractHandler{
 
     @Override
     public void handle(RoutingContext routingContext) {
-        getAllAuthorsFlow.run(new ExecGetAllAuthorsMsg(), done -> sendResponse(routingContext.response(), JsonUtils.objToString(done.getResponse()), 200));
+        long startTime = System.currentTimeMillis();
+        getAllAuthorsFlow.run(new ExecGetAllAuthorsMsg(), done -> {
+            long startSendResponseTime = System.currentTimeMillis();
+            sendResponse(routingContext.response(), JsonUtils.objToString(done.getResponse()), 200);
+            log.info("Parse to Str  =====================================> {}ms", System.currentTimeMillis() - startSendResponseTime);
+            log.info("Total latency =====================================> {}ms", System.currentTimeMillis() - startTime);
+        });
     }
 }

@@ -12,8 +12,8 @@ public class Main {
     private static final Logger log = Logger.getLogger(Main.class);
     public static void main(String[] args) {
         JsonObject zkConfig = new JsonObject();
-//        zkConfig.put("zookeeperHosts", "localhost");
-        zkConfig.put("zookeeperHosts", "172.31.46.15");
+        zkConfig.put("zookeeperHosts", "localhost");
+//        zkConfig.put("zookeeperHosts", "172.31.46.15");
         zkConfig.put("rootPath", "io.vertx");
         zkConfig.put("retry", new JsonObject()
                 .put("initialSleepTime", 3000)
@@ -25,7 +25,7 @@ public class Main {
         Vertx.clusteredVertx(options, res -> {
             if (res.succeeded()) {
                 Vertx vertx = res.result();
-                DeploymentOptions deploymentOptions = new DeploymentOptions().setInstances(1);
+                DeploymentOptions deploymentOptions = new DeploymentOptions().setInstances(9);
                 vertx.deployVerticle(HttpServerVerticle.class.getName(), deploymentOptions);
             }
         });

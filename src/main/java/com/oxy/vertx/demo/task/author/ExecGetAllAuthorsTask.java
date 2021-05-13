@@ -25,7 +25,10 @@ public class ExecGetAllAuthorsTask extends OxyTask<ExecGetAllAuthorsMsg> {
             }
 
             String limit = done.getValue();
+            long startQueryTime = System.currentTimeMillis();
             BaseJDBCClientImpl.getClient().doQuery("select * from authors limit " + limit, Author.class, doneQuery -> {
+                log.info("Query latency ====================================> {}ms", System.currentTimeMillis() - startQueryTime);
+                long startMapperTime = System.currentTimeMillis();
                 responseMsg.setListAuthors(doneQuery.stream()
                         .map(author -> AuthorDTO.AuthorFluentBuilder()
                                 .setId(author.getId())
@@ -37,6 +40,7 @@ public class ExecGetAllAuthorsTask extends OxyTask<ExecGetAllAuthorsMsg> {
                                 .build()).collect(Collectors.toList()));
                 responseMsg.setResult(doneQuery.size());
                 responseMsg.setDescription("Success");
+                log.info("Map obj to DTO ===================================> {}ms", System.currentTimeMillis() - startMapperTime);
                 nextTask.handle(input);
             });
         });
