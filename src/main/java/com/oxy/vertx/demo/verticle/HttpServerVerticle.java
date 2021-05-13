@@ -17,9 +17,8 @@ public class HttpServerVerticle extends AbstractVerticle {
         Router router = routing();
         vertx.createHttpServer()
             .requestHandler(router)
-            .listen(8010, http -> {
+            .listen(8020, http -> {
                 if (http.succeeded()) {
-                    startPromise.complete();
                     new LoadConfigFlow().run(new StartUpMsg(), done -> {
                         if (!done.isBreakWorkFlow()) {
                             log.info("Service start success");
@@ -28,7 +27,8 @@ public class HttpServerVerticle extends AbstractVerticle {
                             System.exit(1);
                         }
                     });
-                    System.out.println("HTTP server started on port 8010");
+                    log.info("HTTP server started on port 8020");
+                    startPromise.complete();
                 } else {
                     startPromise.fail(http.cause());
                 }
