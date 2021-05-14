@@ -4,7 +4,7 @@ FROM vertx/vertx3
 ENV VERTICLE_JAR target/vertx-task-flow-1.0-SNAPSHOT-fat.jar
 ENV VERTICLE_HOME verticles
 
-EXPOSE 8024
+EXPOSE 8025
 
 # Copy the jar file into a container folder
 COPY $VERTICLE_JAR $VERTICLE_HOME/application.jar
