@@ -25,7 +25,7 @@ public class HttpServerVerticle extends AbstractVerticle {
         Router router = routing();
         vertx.createHttpServer()
             .requestHandler(router)
-            .listen(8028, http -> {
+            .listen(8029, http -> {
                 if (http.succeeded()) {
                     new LoadConfigFlow().run(new StartUpMsg(), done -> {
                         if (!done.isBreakWorkFlow()) {
