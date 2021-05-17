@@ -41,6 +41,7 @@ public class HttpServerVerticle extends AbstractVerticle {
     private Router routing() {
         Router router = Router.router(vertx);
         router.route().handler(BodyHandler.create());
+
         Set<String> allowedHeaders = new HashSet<>();
         allowedHeaders.add("x-requested-with");
         allowedHeaders.add("Access-Control-Allow-Origin");
@@ -56,9 +57,11 @@ public class HttpServerVerticle extends AbstractVerticle {
         allowedMethods.add(HttpMethod.DELETE);
         allowedMethods.add(HttpMethod.PATCH);
         allowedMethods.add(HttpMethod.PUT);
+
         AuthorHandler authorHandler = new AuthorHandler(vertx);
         router.route(HttpMethod.GET, "/authors").handler(authorHandler::fetchAllAuthors);
         router.route(HttpMethod.GET, "/authors-db").handler(authorHandler::fetchAuthorsFromDB);
+
         router.route().handler(CorsHandler.create("*").allowedHeaders(allowedHeaders).allowedMethods(allowedMethods));
         return router;
     }

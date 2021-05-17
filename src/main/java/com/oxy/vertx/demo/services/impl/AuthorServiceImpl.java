@@ -17,15 +17,19 @@ public class AuthorServiceImpl implements AuthorService {
     public void fetchAllAuthors(JsonObject input, Handler<AsyncResult<String>> resultHandler) {
         long time = input.getLong("time");
         new GetAllAuthorsFlow().run(new ExecGetAllAuthorsMsg(),
-                done -> resultHandler.handle(Future.succeededFuture(JsonUtils.objToString(done.getResponse()))));
-        log.info("total latency =====================> {}", System.currentTimeMillis() - time);
+            done -> {
+                resultHandler.handle(Future.succeededFuture(JsonUtils.objToString(done.getResponse())));
+                log.info("total latency =====================> {}", System.currentTimeMillis() - time);
+            });
     }
 
     @Override
     public void fetchAuthorsFromDB(JsonObject input, Handler<AsyncResult<String>> resultHandler) {
         long time = input.getLong("time");
         new GetAuthorsFromDBFlow().run(new ExecGetAllAuthorsMsg(),
-                done -> resultHandler.handle(Future.succeededFuture(JsonUtils.objToString(done.getResponse()))));
-        log.info("total latency =====================> {}", System.currentTimeMillis() - time);
+            done -> {
+                resultHandler.handle(Future.succeededFuture(JsonUtils.objToString(done.getResponse())));
+                log.info("total latency =====================> {}", System.currentTimeMillis() - time);
+            });
     }
 }
