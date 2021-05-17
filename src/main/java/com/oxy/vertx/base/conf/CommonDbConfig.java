@@ -40,7 +40,6 @@ public class CommonDbConfig extends WarriorTask<BaseRequest> {
 
     private void loadDbConfig(BaseRequest input, Handler<BaseRequest> nextTask) {
         BaseJDBCClientImpl.getClient().doQuery(SQL, DbConfig.class, done -> {
-            log.info("Get config from config success with size {}", done.size());
             Map<String, String> tempConfig = new HashMap<>();
             done.forEach(dbConfig -> tempConfig.put(dbConfig.getKey_id(), dbConfig.getValue()));
             config = tempConfig;

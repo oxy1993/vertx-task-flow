@@ -101,7 +101,6 @@ public class CommonConfig extends WarriorTask<BaseRequest> {
     protected void exec(BaseRequest input, Handler<BaseRequest> nextTask) {
         try {
             String env = System.getenv("XPC_SERVICE_NAME");
-            log.info(env);
             InputStream is;
             if (env != null && env.contains("intellij")) {
                 is = getFileFromResourceAsStream("conf/dev.conf");
@@ -109,7 +108,6 @@ public class CommonConfig extends WarriorTask<BaseRequest> {
                 is = getFileFromResourceAsStream("conf/prod.conf");
             }
             config = new JsonObject(getStringFromFile(is));
-            log.info("Load config success: {}", config);
             nextTask.handle(input);
         } catch (Exception e) {
             log.error("Load config fail", e);

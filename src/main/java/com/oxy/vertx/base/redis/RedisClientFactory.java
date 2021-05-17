@@ -41,7 +41,6 @@ public class RedisClientFactory extends WarriorTask<StartUpMsg> {
                             RedisAPI.api(client).subscribe(agrs, done -> {
                                 if (done.succeeded()) {
                                     client.handler(response -> resultHandler.handle(response.toString()));
-                                    log.info("Redis api client subscription topic {} succeeded", topic);
                                 } else {
                                     log.error("Unable to subscribe redis client", done.cause());
                                 }
@@ -58,7 +57,6 @@ public class RedisClientFactory extends WarriorTask<StartUpMsg> {
         JsonObject redisConfig = CommonConfig.getConfigAsJson("redis");
         log.info("Connect to redis with config: {}", redisConfig);
         redisClient = RedisClient.create(CommonConfig.getVertx(), new RedisOptions(redisConfig));
-        log.info("Redis {}", redisClient.toString());
         nextTask.handle(input);
     }
 }

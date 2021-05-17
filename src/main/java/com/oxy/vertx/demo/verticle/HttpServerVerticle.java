@@ -25,9 +25,9 @@ public class HttpServerVerticle extends AbstractVerticle {
                 if (http.succeeded()) {
                     new LoadConfigFlow().run(new StartUpMsg(), done -> {
                         if (!done.isBreakWorkFlow()) {
-                            log.info("Service start success");
+                            log.info("HttpServerVerticle start success");
                         } else {
-                            log.error("Service start fail");
+                            log.error("HttpServerVerticle start fail");
                             System.exit(1);
                         }
                     });
