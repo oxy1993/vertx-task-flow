@@ -1,6 +1,6 @@
 package com.oxy.vertx.base.conf;
 
-import com.oxy.vertx.base.OxyTask;
+import com.oxy.vertx.base.WarriorTask;
 import com.oxy.vertx.base.entities.BaseRequest;
 import com.oxy.vertx.base.utils.Logger;
 import io.vertx.core.Handler;
@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-public class CommonConfig extends OxyTask<BaseRequest> {
+public class CommonConfig extends WarriorTask<BaseRequest> {
 
     private static JsonObject config;
     private static Vertx vertx;

@@ -4,7 +4,7 @@ import com.oxy.vertx.base.utils.Logger;
 import com.oxy.vertx.base.entities.IRequest;
 import io.vertx.core.Handler;
 
-public abstract class OxyTask<T extends IRequest> {
+public abstract class WarriorTask<T extends IRequest> {
 
     protected final Logger log = Logger.getLogger(this.getClass());
 

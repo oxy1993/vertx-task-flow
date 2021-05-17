@@ -1,11 +1,11 @@
 package com.oxy.vertx.base.redis;
 
-import com.oxy.vertx.base.OxyTask;
+import com.oxy.vertx.base.WarriorTask;
 import com.oxy.vertx.base.msg.GetSetRedisValueMsg;
 import io.vertx.core.Handler;
 import io.vertx.redis.op.SetOptions;
 
-public class SetRedisHelperTask extends OxyTask<GetSetRedisValueMsg> {
+public class SetRedisHelperTask extends WarriorTask<GetSetRedisValueMsg> {
 
     @Override
     protected void exec(GetSetRedisValueMsg input, Handler<GetSetRedisValueMsg> nextTask) {

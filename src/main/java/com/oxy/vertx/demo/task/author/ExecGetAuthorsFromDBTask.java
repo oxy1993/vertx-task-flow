@@ -1,6 +1,6 @@
 package com.oxy.vertx.demo.task.author;
 
-import com.oxy.vertx.base.OxyTask;
+import com.oxy.vertx.base.WarriorTask;
 import com.oxy.vertx.base.jdbc.BaseJDBCClientImpl;
 import com.oxy.vertx.base.msg.GetSetRedisValueMsg;
 import com.oxy.vertx.base.redis.GetRedisHelperTask;
@@ -12,7 +12,7 @@ import io.vertx.core.Handler;
 
 import java.util.stream.Collectors;
 
-public class ExecGetAuthorsFromDBTask extends OxyTask<ExecGetAllAuthorsMsg> {
+public class ExecGetAuthorsFromDBTask extends WarriorTask<ExecGetAllAuthorsMsg> {
     @Override
     protected void exec(ExecGetAllAuthorsMsg input, Handler<ExecGetAllAuthorsMsg> nextTask) {
         GetAllAuthorsResponseMsg responseMsg = input.createResponse(GetAllAuthorsResponseMsg.class);

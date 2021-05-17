@@ -1,6 +1,6 @@
 package com.oxy.vertx.base.conf;
 
-import com.oxy.vertx.base.OxyTask;
+import com.oxy.vertx.base.WarriorTask;
 import com.oxy.vertx.base.entities.BaseRequest;
 import com.oxy.vertx.base.jdbc.BaseJDBCClientImpl;
 import com.oxy.vertx.base.redis.RedisClientFactory;
@@ -9,7 +9,7 @@ import io.vertx.core.Handler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonDbConfig extends OxyTask<BaseRequest> {
+public class CommonDbConfig extends WarriorTask<BaseRequest> {
 
     private static final String SQL = "SELECT * FROM config";
     private static Map<String, String> config;

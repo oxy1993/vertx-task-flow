@@ -5,7 +5,7 @@ import com.oxy.vertx.base.conf.CommonDbConfig;
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.redis.RedisClientFactory;
 
-public abstract class BaseStartUpFlow extends OxyFlow<StartUpMsg> {
+public abstract class BaseStartUpFlow extends WarriorFlow<StartUpMsg> {
     protected BaseStartUpFlow() {
         addTask(new CommonConfig());
         addTask(new CommonDbConfig());
@@ -13,5 +13,5 @@ public abstract class BaseStartUpFlow extends OxyFlow<StartUpMsg> {
         addTask(getChildTask());
     }
 
-    protected abstract OxyTask<StartUpMsg> getChildTask();
+    protected abstract WarriorTask<StartUpMsg> getChildTask();
 }

@@ -31,7 +31,6 @@ public class HttpServerVerticle extends AbstractVerticle {
                             System.exit(1);
                         }
                     });
-                    log.info("HTTP server started on port 8020");
                     startPromise.complete();
                 } else {
                     startPromise.fail(http.cause());

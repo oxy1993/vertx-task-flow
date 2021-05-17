@@ -1,6 +1,6 @@
 package com.oxy.vertx.base.redis;
 
-import com.oxy.vertx.base.OxyTask;
+import com.oxy.vertx.base.WarriorTask;
 import com.oxy.vertx.base.conf.CommonConfig;
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.utils.Logger;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RedisClientFactory extends OxyTask<StartUpMsg> {
+public class RedisClientFactory extends WarriorTask<StartUpMsg> {
     private static final Logger log = Logger.getLogger(RedisClientFactory.class);
     private static RedisClient redisClient;
 

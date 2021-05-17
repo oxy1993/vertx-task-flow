@@ -1,13 +1,13 @@
 package com.oxy.vertx.demo.flow;
 
 import com.oxy.vertx.base.BaseStartUpFlow;
-import com.oxy.vertx.base.OxyTask;
+import com.oxy.vertx.base.WarriorTask;
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.demo.task.start_up.StartHttpServerTask;
 
 public class LoadConfigFlow extends BaseStartUpFlow {
     @Override
-    protected OxyTask<StartUpMsg> getChildTask() {
+    protected WarriorTask<StartUpMsg> getChildTask() {
         return new StartHttpServerTask();
     }
 }
