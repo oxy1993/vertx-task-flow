@@ -2,16 +2,12 @@ package com.oxy.vertx.demo.verticle;
 
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.utils.Logger;
-import com.oxy.vertx.demo.constant.Action;
-import com.oxy.vertx.demo.constant.QueueName;
 import com.oxy.vertx.demo.flow.LoadConfigFlow;
+import com.oxy.vertx.demo.handler.AuthorHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
-import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.http.HttpMethod;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CorsHandler;
 
@@ -61,23 +57,10 @@ public class HttpServerVerticle extends AbstractVerticle {
         allowedMethods.add(HttpMethod.DELETE);
         allowedMethods.add(HttpMethod.PATCH);
         allowedMethods.add(HttpMethod.PUT);
-        router.route(HttpMethod.GET, "/authors").handler(this::AuthorHandler);
+        AuthorHandler authorHandler = new AuthorHandler(vertx);
+        router.route(HttpMethod.GET, "/authors").handler(authorHandler::fetchAllAuthors);
+        router.route(HttpMethod.GET, "/authors-db").handler(authorHandler::fetchAuthorsFromDB);
         router.route().handler(CorsHandler.create("*").allowedHeaders(allowedHeaders).allowedMethods(allowedMethods));
         return router;
     }
-
-    private void AuthorHandler(RoutingContext context) {
-        JsonObject message = new JsonObject().put("time", System.currentTimeMillis());
-        DeliveryOptions options = new DeliveryOptions().addHeader("action", Action.GET_AUTHORS);
-        vertx.eventBus().request(QueueName.AUTHOR_QUEUE_NAME, message, options, reply -> {
-            if(reply.succeeded()){
-                context.response()
-                        .end(reply.result().body().toString());
-            } else{
-                context.response().setStatusCode(500)
-                        .end(reply.cause().getMessage());
-            }
-        });
-    }
-
 }
