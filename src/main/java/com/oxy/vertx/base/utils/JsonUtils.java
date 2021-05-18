@@ -6,13 +6,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.oxy.vertx.demo.dto.AuthorDTO;
-import io.vertx.core.AsyncResult;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class JsonUtils {
@@ -35,6 +32,7 @@ public class JsonUtils {
         fieldMapper.put("share", "SHAREVALUE");
 
         mapper = new ObjectMapper();
+
         mapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
         mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

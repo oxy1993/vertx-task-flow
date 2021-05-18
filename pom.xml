@@ -18,7 +18,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
-            <version>3.8.3</version>
+            <version>4.0.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/no.finn.unleash/unleash-client-java -->
@@ -28,25 +28,25 @@
             <version>4.2.1</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-web -->
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-web-openapi -->
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-            <version>3.8.3</version>
+            <artifactId>vertx-web-openapi</artifactId>
+            <version>4.0.3</version>
         </dependency>
+
 
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-rabbitmq-client</artifactId>
-            <version>3.8.3</version>
+            <version>4.0.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.vertx/vertx-jdbc-client -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-jdbc-client</artifactId>
-            <version>3.8.3</version>
+            <version>4.0.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-redis-client</artifactId>
-            <version>3.8.3</version>
+            <version>4.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -99,42 +99,61 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-zookeeper</artifactId>
-            <version>3.8.3</version>
+            <version>4.0.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.vertx/vertx-service-proxy -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-service-proxy</artifactId>
-            <version>4.1.0.Beta1</version>
+            <version>4.0.3</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/io.vertx/vertx-codegen -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-codegen</artifactId>
-            <version>4.1.0-SNAPSHOT</version>
+            <version>4.0.3</version>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-docgen</artifactId>
             <version>0.9.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-auth-jwt -->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.vertx/vertx-auth-jwt &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.vertx</groupId>-->
+<!--            <artifactId>vertx-auth-jwt</artifactId>-->
+<!--            <version>4.0.3</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-auth-common</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.12.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.12.3</version>
+        </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-auth-jwt</artifactId>
             <version>4.1.0.Beta1</version>
         </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-auth-common</artifactId>
-            <version>4.1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>1.15.2</version>
-        </dependency>
+
     </dependencies>
     <build>
         <resources>

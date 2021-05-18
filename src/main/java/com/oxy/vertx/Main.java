@@ -3,6 +3,7 @@ package com.oxy.vertx;
 import com.oxy.vertx.base.utils.Logger;
 import com.oxy.vertx.demo.verticle.AuthorConsumerVerticle;
 import com.oxy.vertx.demo.verticle.HttpServerVerticle;
+import com.oxy.vertx.demo.verticle.LoginConsumerVerticle;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
@@ -40,6 +41,7 @@ public class Main {
                 DeploymentOptions deploymentOptions = new DeploymentOptions().setInstances(3);
                 vertx.deployVerticle(HttpServerVerticle.class.getName(), deploymentOptions);
                 vertx.deployVerticle(AuthorConsumerVerticle.class.getName(), deploymentOptions);
+                vertx.deployVerticle(LoginConsumerVerticle.class.getName(), deploymentOptions);
             }
         });
     }

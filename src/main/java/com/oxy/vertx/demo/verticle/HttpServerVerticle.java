@@ -4,6 +4,7 @@ import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.utils.Logger;
 import com.oxy.vertx.demo.flow.LoadConfigFlow;
 import com.oxy.vertx.demo.handler.AuthorHandler;
+import com.oxy.vertx.demo.handler.LoginHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.http.HttpMethod;
@@ -61,6 +62,9 @@ public class HttpServerVerticle extends AbstractVerticle {
         AuthorHandler authorHandler = new AuthorHandler(vertx);
         router.route(HttpMethod.GET, "/authors").handler(authorHandler::fetchAllAuthors);
         router.route(HttpMethod.GET, "/authors-db").handler(authorHandler::fetchAuthorsFromDB);
+
+        LoginHandler loginHandler = new LoginHandler(vertx);
+        router.route(HttpMethod.GET, "/login").handler(loginHandler::login);
 
         router.route().handler(CorsHandler.create("*").allowedHeaders(allowedHeaders).allowedMethods(allowedMethods));
         return router;
