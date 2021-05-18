@@ -3,7 +3,7 @@ package com.oxy.vertx.demo.verticle;
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.utils.JWTUtils;
 import com.oxy.vertx.base.utils.Logger;
-import com.oxy.vertx.demo.flow.LoadConfigFlow;
+import com.oxy.vertx.demo.flow.StartUpFlow;
 import com.oxy.vertx.demo.handler.AuthorHandler;
 import com.oxy.vertx.demo.handler.LoginHandler;
 import io.vertx.core.AbstractVerticle;
@@ -26,7 +26,7 @@ public class HttpServerVerticle extends AbstractVerticle {
             .requestHandler(router)
             .listen(8029, http -> {
                 if (http.succeeded()) {
-                    new LoadConfigFlow().run(new StartUpMsg(), done -> {
+                    new StartUpFlow().run(new StartUpMsg(), done -> {
                         if (!done.isBreakWorkFlow()) {
                             log.info("HttpServerVerticle start success");
                         } else {

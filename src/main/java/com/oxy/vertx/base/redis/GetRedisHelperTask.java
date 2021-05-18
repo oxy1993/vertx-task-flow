@@ -17,15 +17,5 @@ public class GetRedisHelperTask extends WarriorTask<GetSetRedisValueMsg> {
             }
             nextTask.handle(input);
         });
-
-        RedisClientFactory.getRedisClient().get(input.getKey(), done -> {
-            if (done.succeeded()) {
-                input.setValue(done.result().toString());
-            } else {
-                log.error("Get redis fail for key: {},  value: {}", input.getKey(), done.result(), done.cause());
-                input.fail(1);
-            }
-            nextTask.handle(input);
-        });
     }
 }
