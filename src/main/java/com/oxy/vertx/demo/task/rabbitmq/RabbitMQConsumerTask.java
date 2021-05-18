@@ -1,11 +1,9 @@
 package com.oxy.vertx.demo.task.rabbitmq;
 
 import com.oxy.vertx.base.WarriorTask;
-import com.oxy.vertx.base.conf.CommonConfig;
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.rabbitmq.RabbitConnector;
 import io.vertx.core.Handler;
-import io.vertx.core.json.JsonObject;
 import io.vertx.rabbitmq.QueueOptions;
 import io.vertx.rabbitmq.RabbitMQClient;
 

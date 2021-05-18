@@ -1,15 +1,13 @@
 package com.oxy.vertx.base.rabbitmq;
 
-import io.vertx.core.Vertx;
+import com.oxy.vertx.base.conf.CommonConfig;
 import io.vertx.rabbitmq.RabbitMQClient;
 import io.vertx.rabbitmq.RabbitMQOptions;
 
 public class RabbitConnector {
-    private static Vertx vertx;
     private static RabbitMQClient client;
 
     private RabbitConnector() {
-        vertx = Vertx.vertx();
         RabbitMQOptions config = new RabbitMQOptions();
         initConnection(config);
     }
@@ -36,9 +34,9 @@ public class RabbitConnector {
         config.setRequestedHeartbeat(60); // in seconds
         config.setHandshakeTimeout(6000); // in milliseconds
         config.setRequestedChannelMax(5);
-        config.setNetworkRecoveryInterval(500); // in milliseconds
+        config.setNetworkRecoveryInterval(10000); // in milliseconds
         config.setAutomaticRecoveryEnabled(true);
-        client = RabbitMQClient.create(vertx, config);
+        client = RabbitMQClient.create(CommonConfig.getVertx(), config);
         client.start(asyncResult -> {
             if (asyncResult.succeeded()) {
                 System.out.println("RabbitMQ successfully connected!");
