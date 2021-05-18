@@ -12,7 +12,7 @@ import io.vertx.core.json.JsonObject;
 public class LoginServiceImpl implements LoginService {
     @Override
     public void login(JsonObject input, Handler<AsyncResult<String>> resultHandler) {
-        new LoginFlow().run(new LoginMsg("oxy", "123"),
+        new LoginFlow().run(new LoginMsg(input.getString("username"), input.getString("password")),
                 done -> resultHandler.handle(Future.succeededFuture(JsonUtils.objToString(done.getResponse()))));
     }
 }

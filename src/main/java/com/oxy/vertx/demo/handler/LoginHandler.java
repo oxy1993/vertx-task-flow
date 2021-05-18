@@ -14,7 +14,8 @@ public class LoginHandler {
     }
 
     public void login(RoutingContext context) {
-        loginService.login(new JsonObject(), res -> {
+        JsonObject bodyAsJson = context.getBodyAsJson();
+        loginService.login(bodyAsJson, res -> {
             if (res.succeeded()) {
                 context.response().end(res.result());
             } else {

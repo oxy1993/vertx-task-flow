@@ -1,6 +1,7 @@
 package com.oxy.vertx.demo.verticle;
 
 import com.oxy.vertx.base.entities.StartUpMsg;
+import com.oxy.vertx.base.utils.JWTUtils;
 import com.oxy.vertx.base.utils.Logger;
 import com.oxy.vertx.demo.flow.LoadConfigFlow;
 import com.oxy.vertx.demo.handler.AuthorHandler;
@@ -8,9 +9,13 @@ import com.oxy.vertx.demo.handler.LoginHandler;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.ext.auth.KeyStoreOptions;
+import io.vertx.ext.auth.jwt.JWTAuth;
+import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CorsHandler;
+import io.vertx.ext.web.handler.JWTAuthHandler;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -59,12 +64,14 @@ public class HttpServerVerticle extends AbstractVerticle {
         allowedMethods.add(HttpMethod.PATCH);
         allowedMethods.add(HttpMethod.PUT);
 
+        router.route("/api/*").handler(JWTAuthHandler.create(JWTUtils.getInstance().getProvider()));
+
         AuthorHandler authorHandler = new AuthorHandler(vertx);
-        router.route(HttpMethod.GET, "/authors").handler(authorHandler::fetchAllAuthors);
-        router.route(HttpMethod.GET, "/authors-db").handler(authorHandler::fetchAuthorsFromDB);
+        router.route(HttpMethod.GET, "/api/authors").handler(authorHandler::fetchAllAuthors);
+        router.route(HttpMethod.GET, "/api/authors-db").handler(authorHandler::fetchAuthorsFromDB);
 
         LoginHandler loginHandler = new LoginHandler(vertx);
-        router.route(HttpMethod.GET, "/login").handler(loginHandler::login);
+        router.route(HttpMethod.POST, "/login").handler(loginHandler::login);
 
         router.route().handler(CorsHandler.create("*").allowedHeaders(allowedHeaders).allowedMethods(allowedMethods));
         return router;
