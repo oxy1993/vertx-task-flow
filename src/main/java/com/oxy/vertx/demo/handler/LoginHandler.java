@@ -1,6 +1,6 @@
 package com.oxy.vertx.demo.handler;
 
-import com.oxy.vertx.demo.constant.QueueName;
+import com.oxy.vertx.demo.constant.VertxQueueName;
 import com.oxy.vertx.demo.services.LoginService;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
@@ -10,7 +10,7 @@ public class LoginHandler {
     private final LoginService loginService;
 
     public LoginHandler(Vertx vertx) {
-        this.loginService = LoginService.createProxy(vertx, QueueName.LOGIN_QUEUE_NAME);
+        this.loginService = LoginService.createProxy(vertx, VertxQueueName.LOGIN_QUEUE_NAME);
     }
 
     public void login(RoutingContext context) {

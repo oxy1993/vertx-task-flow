@@ -13,21 +13,14 @@ import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
 public class Main {
     private static final Logger log = Logger.getLogger(Main.class);
     public static void main(String[] args) {
-// ============================== 1 instance ============================================================
-//        Vertx vertx = Vertx.vertx();
-//        vertx.deployVerticle(HttpServerVerticle.class.getName());
-//        vertx.deployVerticle(AuthorConsumerVerticle.class.getName());
-
-// ============================== multi instance ============================================================
         JsonObject zkConfig = new JsonObject();
 
         // run local
         zkConfig.put("zookeeperHosts", "localhost");
-
         // run on ec2
 //        zkConfig.put("zookeeperHosts", "172.31.46.15");
-        zkConfig.put("rootPath", "io.vertx");
 
+        zkConfig.put("rootPath", "io.vertx");
         zkConfig.put("retry", new JsonObject()
                 .put("initialSleepTime", 3000)
                 .put("maxTimes", 3));

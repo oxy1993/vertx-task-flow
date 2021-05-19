@@ -1,7 +1,7 @@
 package com.oxy.vertx.demo.handler;
 
 import com.oxy.vertx.base.utils.Logger;
-import com.oxy.vertx.demo.constant.QueueName;
+import com.oxy.vertx.demo.constant.VertxQueueName;
 import com.oxy.vertx.demo.services.AuthorService;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
@@ -12,7 +12,7 @@ public class AuthorHandler {
     private static final Logger log = Logger.getLogger(AuthorHandler.class);
 
     public AuthorHandler(Vertx vertx) {
-        this.authorService = AuthorService.createProxy(vertx, QueueName.AUTHOR_QUEUE_NAME);
+        this.authorService = AuthorService.createProxy(vertx, VertxQueueName.AUTHOR_QUEUE_NAME);
     }
 
     public void fetchAllAuthors(RoutingContext context) {

@@ -1,6 +1,5 @@
 package com.oxy.vertx.base.utils;
 
-import com.oxy.vertx.base.conf.WarriorConfig;
 import com.oxy.vertx.base.conf.WarriorContext;
 import io.vertx.ext.auth.KeyStoreOptions;
 import io.vertx.ext.auth.jwt.JWTAuth;

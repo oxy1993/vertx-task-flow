@@ -16,18 +16,19 @@ public class RabbitMQConsumerTask extends WarriorTask<StartUpMsg> {
                 .setKeepMostRecent(true);
 
         RabbitMQClient rabbitMQClient = RabbitConnector.getConnection().getClient();
-//        rabbitMQClient.basicConsumer("my.queue", options, rabbitMQConsumerAsyncResult -> {
-//            if (rabbitMQConsumerAsyncResult.succeeded()) {
-//                System.out.println("RabbitMQ consumer created !");
-//                RabbitMQConsumer mqConsumer = rabbitMQConsumerAsyncResult.result();
-//                mqConsumer.handler(message -> {
-//                    System.out.println("Got message: " + message.body().toString());
-//                });
-//            } else {
-//                rabbitMQConsumerAsyncResult.cause().printStackTrace();
-//            }
-//            nextTask.handle(input);
-//        });
-        nextTask.handle(input);
+        if (rabbitMQClient != null) {
+            rabbitMQClient.basicConsumer("my.queue", options, rabbitMQConsumerAsyncResult -> {
+                if (rabbitMQConsumerAsyncResult.succeeded()) {
+                    System.out.println("RabbitMQ consumer created !");
+                    RabbitMQConsumer mqConsumer = rabbitMQConsumerAsyncResult.result();
+                    mqConsumer.handler(message -> {
+                        System.out.println("Got message: " + message.body().toString());
+                    });
+                } else {
+                    rabbitMQConsumerAsyncResult.cause().printStackTrace();
+                }
+                nextTask.handle(input);
+            });
+        }
     }
 }

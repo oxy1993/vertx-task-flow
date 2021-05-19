@@ -1,9 +1,12 @@
 package com.oxy.vertx.base.rabbitmq;
 
-import com.oxy.vertx.base.conf.WarriorConfig;
 import com.oxy.vertx.base.conf.WarriorContext;
 import io.vertx.rabbitmq.RabbitMQClient;
 import io.vertx.rabbitmq.RabbitMQOptions;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class RabbitConnector {
     private static RabbitMQClient client;
@@ -22,7 +25,21 @@ public class RabbitConnector {
     }
 
     public RabbitMQClient getClient() {
-        return client;
+        CompletableFuture<RabbitMQClient> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+            return client;
+        });
+
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static void initConnection(RabbitMQOptions config) {
