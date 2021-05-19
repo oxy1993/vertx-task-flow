@@ -4,7 +4,6 @@ import com.oxy.vertx.base.WarriorTask;
 import com.oxy.vertx.base.entities.BaseRequest;
 import com.oxy.vertx.base.utils.Logger;
 import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -13,20 +12,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-public class CommonConfig extends WarriorTask<BaseRequest> {
-
+public class WarriorConfig extends WarriorTask<BaseRequest> {
     private static JsonObject config;
-    private static Vertx vertx;
 
     public static JsonObject getConfigAsJson(String key) {
         return config.getJsonObject(key);
-    }
-
-    public static Vertx getVertx() {
-        if (vertx == null) {
-            vertx = Vertx.vertx();
-        }
-        return vertx;
     }
 
     public static JsonObject getConfigAsJson(String key, JsonObject def) {

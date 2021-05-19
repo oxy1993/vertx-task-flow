@@ -1,7 +1,8 @@
 package com.oxy.vertx.base.redis;
 
 import com.oxy.vertx.base.WarriorTask;
-import com.oxy.vertx.base.conf.CommonConfig;
+import com.oxy.vertx.base.conf.WarriorConfig;
+import com.oxy.vertx.base.conf.WarriorContext;
 import com.oxy.vertx.base.entities.StartUpMsg;
 import com.oxy.vertx.base.utils.Logger;
 import io.vertx.core.Handler;
@@ -23,15 +24,15 @@ public class RedisClientFactory extends WarriorTask<StartUpMsg> {
 
     public static RedisAPI getRedisClient() {
         if (redisClient == null) {
-            redisClient = Redis.createClient(CommonConfig.getVertx(), new RedisOptions(CommonConfig.getConfigAsJson("redis")));
+            redisClient = Redis.createClient(WarriorContext.getVertx(), new RedisOptions(WarriorConfig.getConfigAsJson("redis")));
             redis = RedisAPI.api(redisClient);
         }
         return redis;
     }
 
     public static void createRedisPubSubClient(String topic, Handler<String> resultHandler) {
-        JsonObject redisConfig = CommonConfig.getConfigAsJson("redis");
-        Redis.createClient(CommonConfig.getVertx(),
+        JsonObject redisConfig = WarriorConfig.getConfigAsJson("redis");
+        Redis.createClient(WarriorContext.getVertx(),
                 new RedisOptions().setEndpoints(Collections.singletonList("redis://" + redisConfig.getString("host") + ":" + redisConfig.getInteger("port").toString())))
                 .connect(onConnect -> {
                     if (onConnect.succeeded()) {
@@ -55,9 +56,9 @@ public class RedisClientFactory extends WarriorTask<StartUpMsg> {
 
     @Override
     protected void exec(StartUpMsg input, Handler<StartUpMsg> nextTask) {
-        JsonObject redisConfig = CommonConfig.getConfigAsJson("redis");
+        JsonObject redisConfig = WarriorConfig.getConfigAsJson("redis");
         log.info("Connect to redis with config: {}", redisConfig);
-        redisClient = Redis.createClient(CommonConfig.getVertx(), new RedisOptions(redisConfig));
+        redisClient = Redis.createClient(WarriorContext.getVertx(), new RedisOptions(redisConfig));
         redis = RedisAPI.api(redisClient);
         nextTask.handle(input);
     }

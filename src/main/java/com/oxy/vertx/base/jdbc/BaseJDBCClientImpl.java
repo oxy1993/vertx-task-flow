@@ -1,6 +1,7 @@
 package com.oxy.vertx.base.jdbc;
 
-import com.oxy.vertx.base.conf.CommonConfig;
+import com.oxy.vertx.base.conf.WarriorConfig;
+import com.oxy.vertx.base.conf.WarriorContext;
 import com.oxy.vertx.base.utils.JsonUtils;
 import com.oxy.vertx.base.utils.Logger;
 import io.vertx.core.AsyncResult;
@@ -34,8 +35,8 @@ public class BaseJDBCClientImpl extends JDBCClientImpl implements BaseJDBCClient
 
     public static BaseJDBCClientImpl getClient() {
         if (jdbcClient == null) {
-            JsonObject config = CommonConfig.getConfigAsJson("db");
-            jdbcClient = new BaseJDBCClientImpl(CommonConfig.getVertx(), config, "be.u.ora");
+            JsonObject config = WarriorConfig.getConfigAsJson("db");
+            jdbcClient = new BaseJDBCClientImpl(WarriorContext.getVertx(), config, "be.u.ora");
         }
         return jdbcClient;
     }
